@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Смена на ПВЗ — браузерная игра</title>
+  <meta name="description" content="Браузерная игра: вы — сотрудник пункта выдачи Ozon. Примите поставку, выдайте заказы, оформите возвраты, разберитесь с конфликтными клиентами и закройте смену." />
+  <meta name="theme-color" content="#0b1120" />
+  <meta property="og:title" content="Смена на ПВЗ — браузерная игра" />
+  <meta property="og:description" content="Смена сотрудника пункта выдачи: приёмка поставок, выдача заказов, возвраты и конфликтные клиенты." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-cell">
+        <span class="label">Смена</span>
+        <span class="value" id="hud-shift">—</span>
+      </div>
+      <div class="hud-cell">
+        <span class="label">Время</span>
+        <span class="value" id="hud-clock">09:00</span>
+      </div>
+      <div class="hud-cell">
+        <span class="label">Репутация</span>
+        <span class="value" id="hud-rep">70</span>
+        <div class="bar"><div class="bar-fill" id="rep-bar" style="width:70%"></div></div>
+      </div>
+      <div class="hud-cell">
+        <span class="label">Деньги</span>
+        <span class="value" id="hud-money">0 ₽</span>
+      </div>
+      <div class="hud-cell">
+        <span class="label">Клиенты</span>
+        <span class="value" id="hud-served">0 / 0</span>
+      </div>
+    </header>
+
+    <main class="stage">
+      <section class="scene">
+        <div class="scene-bar">
+          <span class="scene-title">Склад и окно выдачи</span>
+        </div>
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="game" width="960" height="540" aria-label="Пункт выдачи"></canvas>
+          <button class="btn ghost small fs-btn" id="btn-fullscreen" title="Развернуть сцену">⛶ Развернуть</button>
+          <button class="btn ghost small fs-btn" id="btn-sound" title="Звук" style="right: 116px">🔊</button>
+        </div>
+        <div class="client-card hidden" id="client-card">
+          <div class="client-top">
+            <span class="client-name" id="client-name">—</span>
+            <span class="mood" id="client-mood">😐 спокоен</span>
+          </div>
+          <div class="client-type" id="client-type">—</div>
+          <div class="bar patience"><div class="bar-fill" id="patience-bar" style="width:100%"></div></div>
+          <div class="client-hint">Терпение клиента</div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="card order-card">
+          <h3>Система · заказ клиента</h3>
+          <div class="order" id="order-card">Заказов нет</div>
+        </div>
+
+        <div class="speech-box">
+          <div class="speech-label">Клиент</div>
+          <p class="speech" id="speech">Нажмите «Приступить к смене», чтобы начать работу.</p>
+          <div class="choices" id="choices"></div>
+        </div>
+
+        <div class="card">
+          <h3>Дела на смене</h3>
+          <ul class="todo" id="todo"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Журнал</h3>
+          <ul class="journal" id="journal"></ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="help">
+      Клик по посылке на полке — выдача заказа · <b class="kbd">1–4</b> — варианты ответа · <b class="kbd">Пробел</b> — продолжить
+    </footer>
+  </div>
+
+  <div class="overlay hidden" id="overlay">
+    <div class="screen">
+      <h1 id="screen-title">Смена на ПВЗ</h1>
+      <p class="screen-sub" id="screen-sub"></p>
+      <div class="screen-extra" id="screen-extra"></div>
+      <div class="screen-actions" id="screen-actions"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="art.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
